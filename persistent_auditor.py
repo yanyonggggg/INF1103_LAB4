@@ -26,3 +26,11 @@ def process_delivery(current_total, new_value):
 def calculate_tax(amount):
     # Calculates 10% tax for a specific delivery amount.
     return amount * 0.10
+
+
+def generate_report(total_units, failed_attempts, history):
+    # Prints the final summary report upon exiting.
+    print("\n--- Final Inventory Report ---")
+    print(f"Total Deliveries Processed: {total_units}")
+    print(f"Number of Failed/Rejected Entries: {failed_attempts}")
+    print(f"Transaction History: {history}")
