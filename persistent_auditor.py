@@ -1,3 +1,39 @@
+import os # Importing the os module to check for file existence
+
+def load_inventory():
+    # Reads previously saved information from the inventory file.
+    # Starts with an empty inventory without error if the file does not exist.
+    inventory = 0
+    history = []
+    
+    if os.path.exists("inventory.txt"): # Checks if file path exists
+        try:
+            with open("inventory.txt", "r") as file:
+                lines = file.readlines() # Reads lines from file and return as string
+                if len(lines) >= 1:
+                    inventory = int(lines[0].strip()) # Splits the string into list of integers
+                if len(lines) >= 2:
+                    history_str = lines[1].strip()
+                    if history_str:
+                        history = [int(x) for x in history_str.split(",")] 
+        except Exception:
+            # Failsafe to ensure the program continues running without producing an error
+            pass
+            
+    return inventory, history
+
+
+def save_inventory(total, history):
+    # Saves the final total and transaction history list to inventory.txt.
+    with open("inventory.txt", "w") as file:
+        file.write(f"{total}\n")
+        
+        # Convert history list to a comma-separated string for easy storage
+        history_str = ",".join(str(item) for item in history)
+        file.write(f"{history_str}\n")
+    print("Data successfully saved to inventory.txt")
+
+
 def get_valid_input():
     # Handles prompt and input validation.
     # Returns an integer delivery amount, or the string 'quit'.
@@ -22,8 +58,8 @@ def process_delivery(current_total, new_value):
     # Calculates and returns the new inventory total.
     return current_total + new_value
 
-
 def calculate_tax(amount):
+
     # Calculates 10% tax for a specific delivery amount.
     return amount * 0.10
 
