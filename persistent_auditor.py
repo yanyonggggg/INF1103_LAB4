@@ -16,3 +16,13 @@ def get_valid_input():
     except ValueError:
         print("ERROR! Please enter a valid integer or 'quit' to exit.")
         return None
+
+
+def process_delivery(current_total, new_value):
+    # Calculates and returns the new inventory total.
+    return current_total + new_value
+
+
+def calculate_tax(amount):
+    # Calculates 10% tax for a specific delivery amount.
+    return amount * 0.10
